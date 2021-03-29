@@ -1,5 +1,5 @@
 # Chess game
-Add description
+TO-DO: Add description
 
 ## Available Scripts
 
