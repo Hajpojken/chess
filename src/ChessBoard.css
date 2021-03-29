@@ -1,0 +1,46 @@
+.ChessBoard {
+  max-width: 800px;
+  max-height: 800px;
+}
+
+.InnerBoard {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: row column-reverse;
+  flex-wrap: wrap;
+}
+
+.square {
+  width: 12.5%;
+}
+
+.square:after {
+  content: "";
+  display: block;
+  padding-bottom: 100%;
+}
+.square img {
+  width: 11%;
+  margin-top: 1%;
+  margin-left: 0.3%;
+  position: absolute;
+}
+
+.square img:after {
+  content: "";
+  display: block;
+  padding-bottom: 100%;
+}
+
+.square.black {
+  background-color: #556b2f;
+}
+
+.square.white {
+  background-color: #bdb76b;
+}
+
+.square.highlight {
+  background-color: rgba(212, 22, 60);
+}
