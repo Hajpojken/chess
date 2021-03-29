@@ -13,7 +13,7 @@
 
 .square {
   width: 12%;
-  border: 1px solid white;
+  border: 1px solid gainsboro;
 }
 
 .square:after {
@@ -24,8 +24,8 @@
 .square img {
   position: absolute;
   width: 11%;
-  padding-top: 0.25em;
-  padding-left: 0.15em;
+  margin-left: 0.1em;
+  margin-top: 0.25em;
   max-width: 95px;
   max-height: 100%;
 }
@@ -45,6 +45,5 @@
 }
 
 .square.highlight {
-  background-color: rgba(212, 22, 60);
-  border: solid 1px white;
+  background-color: rgb(255, 92, 92);
 }
