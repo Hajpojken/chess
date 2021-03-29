@@ -12,7 +12,8 @@
 }
 
 .square {
-  width: 12.5%;
+  width: 12%;
+  border: 1px solid white;
 }
 
 .square:after {
@@ -21,10 +22,12 @@
   padding-bottom: 100%;
 }
 .square img {
-  width: 11%;
-  margin-top: 1%;
-  margin-left: 0.3%;
   position: absolute;
+  width: 11%;
+  padding-top: 0.25em;
+  padding-left: 0.15em;
+  max-width: 95px;
+  max-height: 100%;
 }
 
 .square img:after {
@@ -43,4 +46,5 @@
 
 .square.highlight {
   background-color: rgba(212, 22, 60);
+  border: solid 1px white;
 }

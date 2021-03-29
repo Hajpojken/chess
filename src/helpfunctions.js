@@ -11,6 +11,7 @@ import rockWhite from './icons/rock-white.png'
 import queenWhite from './icons/queen-white.png'
 import kingWhite from './icons/king-white.png'
 
+//"r1b1k1nr/p2p1pNp/n2B4/1p1NP2P/6P1/3P1Q2/P1P1K3/q5b1"
 //takes a fen string and returns a board position
 const analyzeFen = (FEN) => {
     let boardPosition = new Array(8)
@@ -25,52 +26,64 @@ const analyzeFen = (FEN) => {
       switch (c) {
         case 'p':
           boardPosition[rank][file] = {piece: 'pawn', color: 'white', icon: pawnWhite, highlight: false}
+          file ++
           break
         case 'r':
           boardPosition[rank][file] = {piece: 'rock', color: 'white', icon: rockWhite, highlight: false}
+          file ++
           break
         case 'n':
           boardPosition[rank][file] = {piece: 'knight', color: 'white', icon: knightWhite, highlight: false}
+          file ++
           break
         case 'b':
           boardPosition[rank][file] = {piece: 'bishop', color: 'white', icon: bishopWhite, highlight: false}
+          file ++
           break
         case 'q':
           boardPosition[rank][file] = {piece: 'queen', color: 'white', icon: queenWhite, highlight: false}
+          file ++
           break
         case 'k':
           boardPosition[rank][file] = {piece: 'king', color: 'white', icon: kingWhite, highlight: false}
+          file ++
           break
         case 'P':
           boardPosition[rank][file] = {piece: 'pawn', color: 'black', icon: pawnBlack, highlight: false}
+          file ++
           break
         case 'R':
           boardPosition[rank][file] = {piece: 'rock', color: 'black', icon: rockBlack, highlight: false}
+          file ++
           break
         case 'N':
           boardPosition[rank][file] = {piece: 'knight', color: 'black', icon: knightBlack, highlight: false}
+          file ++
           break
         case 'B':
           boardPosition[rank][file] = {piece: 'bishop', color: 'black', icon: bishopBlack, highlight: false}
+          file ++
           break
         case 'Q':
           boardPosition[rank][file] = {piece: 'queen', color: 'black', icon: queenBlack, highlight: false}
+          file ++
           break
         case 'K':
           boardPosition[rank][file] = {piece: 'king', color: 'black', icon: kingBlack, highlight: false}
+          file ++
           break
         case '/':
-          file = -1
+          file = 0
           rank--
           break
         default:
           for (let i=0; i<parseInt(c); i++) {
             boardPosition[rank][file] = {piece: null, color: 'null', icon: null, highlight: false}
             file++
+            console.log("iterator",i)
           }
           break
       }
-      file ++
     }
     return boardPosition
   } 
@@ -200,9 +213,12 @@ const checkHorizontalVertical = (piece, rank, file, board, color) => {
         else if(board[rank-i][file].piece !== null && board[rank-i][file].color === color){
             break
         }
-        else {
+        else if(board[rank-i][file].piece !== null && board[rank-i][file].color !== color){
             moves.push({rank: rank-i, file: file})
             break
+        }
+        else {
+            console.log("error up")
         }
     }
     //down
@@ -216,9 +232,12 @@ const checkHorizontalVertical = (piece, rank, file, board, color) => {
         else if(board[rank+i][file].piece !== null && board[rank+i][file].color === color){
             break
         }
-        else {
+        else if((board[rank+i][file].piece !== null && board[rank+i][file].color !== color)){
             moves.push({rank: rank+i, file: file})
             break
+        }
+        else {
+            console.log("error down")
         }
     }
     //right
@@ -232,9 +251,12 @@ const checkHorizontalVertical = (piece, rank, file, board, color) => {
         else if(board[rank][file+i].piece !== null && board[rank][file+i].color === color){
             break
         }
-        else {
+        else if(board[rank][file+i].piece !== null && board[rank][file+i].color !== color){
             moves.push({rank: rank, file: file+i})
             break
+        }
+        else {
+            console.log("error right")
         }
     }
     //left
@@ -248,9 +270,12 @@ const checkHorizontalVertical = (piece, rank, file, board, color) => {
         else if(board[rank][file-i].piece !== null && board[rank][file-i].color === color){
             break
         }
-        else {
+        else if(board[rank][file-i].piece !== null && board[rank][file-i].color !== color){
             moves.push({rank: rank, file: file-i})
             break
+        }
+        else {
+            console.log("error left")
         }
     }
     return moves
@@ -276,8 +301,12 @@ const checkDiagonals = (piece, rank, file, board, color) => {
         else if(board[rank+i][file+i].piece !== null && board[rank+i][file+i].color === color) {
             break
         }
-        else {
+        else if(board[rank+i][file+i].piece !== null && board[rank+i][file+i].color !== color) {
             moves.push({rank: rank+i, file: file+i})
+            break
+        }
+        else {
+            console.log("error down right")
         }
     }
     //up-right
@@ -291,8 +320,12 @@ const checkDiagonals = (piece, rank, file, board, color) => {
         else if(board[rank-i][file+i].piece !== null && board[rank-i][file+i].color === color) {
             break
         }
-        else {
+        else if(board[rank-i][file+i].piece !== null && board[rank-i][file+i].color !== color) {
             moves.push({rank: rank-i, file: file+i})
+            break
+        }
+        else {
+            console.log("error up right")
         }
     }
     //down-left
@@ -306,8 +339,12 @@ const checkDiagonals = (piece, rank, file, board, color) => {
         else if(board[rank+i][file-i].piece !== null && board[rank+i][file-i].color === color) {
             break
         }
-        else {
+        else if(board[rank+i][file-i].piece !== null && board[rank+i][file-i].color !== color){
             moves.push({rank: rank+i, file: file-i})
+            break
+        }
+        else {
+            console.log("error down left")
         }
     }
     //up-left
@@ -321,8 +358,12 @@ const checkDiagonals = (piece, rank, file, board, color) => {
         else if(board[rank-i][file-i].piece !== null && board[rank-i][file-i].color === color) {
             break
         }
-        else {
+        else if(board[rank-i][file-i].piece !== null && board[rank-i][file-i].color !== color){
             moves.push({rank: rank-i, file: file-i})
+            break
+        }
+        else {
+            console.log("error up left")
         }
     }
     return moves
